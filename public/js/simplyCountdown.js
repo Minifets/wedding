@@ -17,6 +17,7 @@
         extend,
         createElements,
         createCountdownElt,
+        pluralize,
         simplyCountdown;
 
     /**
@@ -106,6 +107,19 @@
         spanTag = document.createElement('span');
         spanTag.classList.add(parameters.inlineClass);
         return spanTag;
+    };
+
+    pluralize = function (number, one, many, other) {
+        let remainder = number % 10;
+        if (number >= 11 && number <= 19) {
+            return other;
+        } else if (remainder === 1) {
+            return one;
+        } else if ([2, 3, 4].includes(remainder)) {
+            return many;
+        }
+
+        return other;
     };
 
     /**
@@ -214,21 +228,25 @@
                 }
 
                 if (parameters.plural) {
-                    dayWord = days > 1
+                    dayWord = pluralize(days, 'день', 'дня', 'дней');
+                    /*dayWord = days > 1
                         ? parameters.words.days + parameters.words.pluralLetter
-                        : parameters.words.days;
+                        : parameters.words.days;*/
 
-                    hourWord = hours > 1
+                    hourWord = pluralize(hours, 'час', 'часа', 'часов');
+                    /*hourWord = hours > 1
                         ? parameters.words.hours + parameters.words.pluralLetter
-                        : parameters.words.hours;
+                        : parameters.words.hours;*/
 
-                    minuteWord = minutes > 1
+                    minuteWord = pluralize(minutes, 'минута', 'минуты', 'минут');
+                    /*minuteWord = minutes > 1
                         ? parameters.words.minutes + parameters.words.pluralLetter
-                        : parameters.words.minutes;
+                        : parameters.words.minutes;*/
 
-                    secondWord = seconds > 1
+                    secondWord = pluralize(seconds, 'секунда', 'секунды', 'секунд');
+                    /*secondWord = seconds > 1
                         ? parameters.words.seconds + parameters.words.pluralLetter
-                        : parameters.words.seconds;
+                        : parameters.words.seconds;*/
 
                 } else {
                     dayWord = parameters.words.days;

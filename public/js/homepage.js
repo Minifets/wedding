@@ -4,7 +4,8 @@ var d = new Date('2021-06-04 17:30');
 simplyCountdown('.simply-countdown-one', {
     year: d.getFullYear(),
     month: d.getMonth() + 1,
-    day: d.getDate()
+    day: d.getDate(),
+    plural: true
 });
 
 //jQuery example
