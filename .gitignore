@@ -18,4 +18,5 @@
 ###> IDEA files ###
 /.idea/
 /theme/
+/config/jwt/
 ###< IDEA files ###
