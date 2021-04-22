@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class InviteController extends AbstractController
 {
     /**
-     * @Route("/invite/{secret}", name="app_invite")
+     * @Route("/invite/{secret}", name="app_invite", defaults={"secret": "none"})
      *
      * @param JWTManager $jwtManager
      * @param Guest|null $guest
@@ -21,12 +21,18 @@ class InviteController extends AbstractController
      */
     public function index(JWTManager $jwtManager, Guest $guest = null): Response
     {
-        if ($guest) {
-            $jwtToken   = $jwtManager->encode(['login' => $guest->getLogin()]);
-            $authCookie = Cookie::create(AppAuthenticator::COOKIE_NAME, $jwtToken, strtotime('2030-01-01'));
+        if (!$this->getUser()) {
+            if ($guest) {
+                $jwtToken   = $jwtManager->encode(['login' => $guest->getLogin()]);
+                $authCookie = Cookie::create(AppAuthenticator::COOKIE_NAME, $jwtToken, strtotime('2030-01-01'));
 
-            $response = new Response();
-            $response->headers->setCookie($authCookie);
+                $response = new Response();
+                $response->headers->setCookie($authCookie);
+            } else {
+                return $this->redirectToRoute('app_homepage');
+            }
+        } else {
+            $guest = $this->getUser();
         }
 
         return $this->render('invite/index.html.twig', [
