@@ -1,4 +1,4 @@
-var d = new Date('2021-06-04 17:30');
+var d = new Date('2021-06-04T17:30:00+06:00');
 
 // default example
 simplyCountdown('.simply-countdown-one', {
