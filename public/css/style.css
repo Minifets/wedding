@@ -353,6 +353,30 @@ h1, h2, h3, h4, h5, h6, figure {
   }
 }
 
+.fh5co-cover-letter {
+  background-image:url('/images/letter.webp');
+  background-position: center center;
+}
+
+@media screen and (max-width: 768px) {
+  .fh5co-cover-letter {
+    background-size: 768px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .fh5co-cover-letter {
+    background-size: 480px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #fh5co-invite-video {
+    position: relative;
+    top: -10em;
+  }
+}
+
 #fh5co-counter,
 #fh5co-event {
   height: 850px;
