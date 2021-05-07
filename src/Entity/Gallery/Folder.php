@@ -42,6 +42,16 @@ class Folder
      */
     private $size = 0;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Photo::class)
+     */
+    private $thumbnail;
+
+    public function __toString()
+    {
+        return (string)$this->name;
+    }
+
     public function __construct()
     {
         $this->photos = new ArrayCollection();
@@ -121,6 +131,18 @@ class Folder
     public function decreaseSize(): self
     {
         $this->size--;
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?Photo
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?Photo $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
 
         return $this;
     }
