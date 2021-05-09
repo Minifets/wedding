@@ -10,15 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomepageController extends AbstractController
 {
     /**
-     * @Route("/", name="app_homepage")
+     * @Route(path="/", name="app_homepage")
      */
     public function index(FolderRepository $gallery): Response
     {
-        return $this->render(
-            'homepage/index.html.twig',
-            [
-                'gallery' => $gallery->findAll()
-            ]
-        );
+        return $this->render('homepage/index.html.twig');
     }
 }

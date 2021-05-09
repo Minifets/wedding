@@ -17,6 +17,7 @@ class GalleryController extends AbstractController
         return $this->render(
             'gallery/index.html.twig',
             [
+                'folder' => $folder,
                 'photos' => $folder->getPhotos()
             ]
         );

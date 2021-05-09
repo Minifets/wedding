@@ -80,10 +80,16 @@
                 <div class="col-sm-6 text-right menu-1">
                     <ul>
                         {% block menu %}
-                            <li><a href="#">Меню 1</a></li>
-                            <li><a href="#">Меню 2</a></li>
-                            <li><a href="#">Меню 3</a></li>
-                            <li><a href="#">Меню 4</a></li>
+                            <li><a href="{{ path('app_homepage') }}">Главная страница</a></li>
+                            <li><a href="{{ path('app_invite') }}">Приглашение</a></li>
+                            <li class="has-dropdown">
+                                <a href="#">Галерея</a>
+                                <ul class="dropdown">
+                                    {% for folder in gallery.findAll %}
+                                        <li><a href="{{ path('app_gallery', {slug: folder.slug}) }}">{{ folder.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
                         {% endblock %}
                     </ul>
                 </div>

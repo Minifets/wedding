@@ -202,7 +202,7 @@
             <div class="row row-bottom-padded-md">
                 <div class="col-md-12">
                     <ul id="fh5co-gallery-list">
-                        {% for folder in gallery %}
+                        {% for folder in gallery.findAll %}
                         <li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url({{ asset(folder.thumbnail.fullPath|default('images/gallery-1.jpg')) }}); ">
                             <a href="{{ path('app_gallery', {'slug': folder.slug}) }}">
                                 <div class="case-studies-summary">
