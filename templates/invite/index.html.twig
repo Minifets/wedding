@@ -1,17 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Приглашение{% endblock %}
 
 {% block header %}
-    <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm fh5co-cover-letter" role="banner">
+    <header id="fh5co-header" class="fh5co-cover fh5co-cover-xs fh5co-cover-letter" role="banner">
         <div class="overlay"></div>
         <div class="fh5co-container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-center">
                     <div class="display-t">
                         <div class="display-tc animate-box" data-animate-effect="fadeIn">
-                            <h1>Couple Story</h1>
-                            <h2>Free HTML5 templates Made by <a href="http://freehtml5.co" target="_blank">FreeHTML5.co</a></h2>
+                            {% if (guest.title) %}
+                                <h1>{{ guest.title }}</h1>
+                            {% else %}
+                                <h1>Уважаемый, {{ guest.username }}</h1>
+                            {% endif %}
+                            {% if (guest.message) %}
+                                <h2>{{ guest.message|raw }}</h2>
+                            {% else %}
+                                <h2>приглашаем вас на нашу свадьбу</h2>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -36,15 +44,51 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Modal title</h4>
+                    <h4 class="modal-title">
+                        {% if (confirmed) %}
+                            Спасибо, что подтвердили свое присутсвие, если передумаете, то сообщите нам заранее.
+                        {% else %}
+                            Пожалуйста, подтвердите свое присутствие.
+                        {% endif %}
+                    </h4>
                 </div>
+                {% if (not confirmed) %}
                 <div class="modal-body">
-                    <p>One fine body&hellip;</p>
+                    <form method="post" action="{{ path('app_invite_confirmation') }}">
+                        {% if (guest.persons|length > 1) %}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" name="confirmation" value="submit">
+                                    Мы придем вместе
+                                </button>
+                            </div>
+                            {% for person in guest.persons %}
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" name="confirmation" value="{{ person }}">
+                                        Может быть только {{ person }}
+                                    </button>
+                                </div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-default" name="confirmation" value="dismiss">
+                                    К сожалению, мы не сможем прийти
+                                </button>
+                            </div>
+                        {% else %}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" name="confirmation" value="submit">
+                                    Я обязательно приду
+                                </button>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-default" name="confirmation" value="dismiss">
+                                    К сожалению, я не смогу прийти
+                                </button>
+                            </div>
+                        {% endif %}
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                {% else %}
+                {% endif %}
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

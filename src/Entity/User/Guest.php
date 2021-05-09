@@ -4,6 +4,7 @@ namespace App\Entity\User;
 
 use App\Repository\User\GuestRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -21,6 +22,7 @@ class Guest implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Gedmo\Slug(fields={"secret"})
      */
     private $login;
 
@@ -33,6 +35,31 @@ class Guest implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $secret;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $message;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $persons = [];
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $confirmations = [];
+
+    public function __construct()
+    {
+        $this->secret = str_replace(['=', '/',], '', base64_encode(random_bytes(10)));
+    }
 
     public function getId(): ?int
     {
@@ -58,7 +85,7 @@ class Guest implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->login;
+        return (string)$this->login;
     }
 
     /**
@@ -115,6 +142,54 @@ class Guest implements UserInterface
     public function setSecret(string $secret): self
     {
         $this->secret = $secret;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(?string $message): self
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    public function getPersons(): array
+    {
+        return $this->persons;
+    }
+
+    public function setPersons(array $persons): self
+    {
+        $this->persons = $persons;
+
+        return $this;
+    }
+
+    public function getConfirmations(): array
+    {
+        return $this->confirmations;
+    }
+
+    public function setConfirmations(array $confirmations): self
+    {
+        $this->confirmations = $confirmations;
 
         return $this;
     }

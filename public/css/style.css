@@ -353,6 +353,31 @@ h1, h2, h3, h4, h5, h6, figure {
   }
 }
 
+.fh5co-cover.fh5co-cover-xs {
+  height: 600px;
+}
+@media screen and (max-width: 768px) {
+  .fh5co-cover.fh5co-cover-xs {
+    height: 250px;
+  }
+}
+.fh5co-cover.fh5co-cover-xs .display-t,
+.fh5co-cover.fh5co-cover-xs .display-tc {
+  height: 600px;
+  display: table;
+  width: 100%;
+}
+@media screen and (max-width: 768px) {
+  .fh5co-cover.fh5co-cover-xs .display-t {
+    height: 250px;
+  }
+  .fh5co-cover.fh5co-cover-xs .display-tc {
+    height: 250px;
+    vertical-align: bottom !important;
+    padding-bottom: 20px;
+  }
+}
+
 .fh5co-cover-letter {
   background-image:url('/images/letter.webp');
   background-position: center center;
