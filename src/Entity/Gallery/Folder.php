@@ -118,7 +118,7 @@ class Folder
 
     public function getSize(): ?int
     {
-        return $this->size;
+        return $this->photos->count();
     }
 
     public function increaseSize(): self

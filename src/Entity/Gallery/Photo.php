@@ -21,9 +21,7 @@ class Photo
 
     /**
      * @ORM\ManyToOne(targetEntity=Folder::class, inversedBy="photos")
-     * @ORM\JoinColumn(nullable=false)
-     *
-     * @Assert\NotNull()
+     * @ORM\JoinColumn(nullable=true)
      */
     private $folder;
 
@@ -33,6 +31,11 @@ class Photo
      * @Assert\NotBlank()
      */
     private $fileName;
+
+    public function __toString()
+    {
+        return (string)$this->fileName;
+    }
 
     public function getId(): ?int
     {
