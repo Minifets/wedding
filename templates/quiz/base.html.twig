@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Свадебная вечеринка</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/quiz.css') }}">
+
+</head>
+<body>
+<div class="quiz-top-area text-center">
+    <h1>{% block title %}Свадебная викторина{% endblock %}</h1>
+    <div class="quiz-countdown text-center ul-li">
+        <ul>
+            <li class="seconds">
+                <span class="count-down-number">0</span>
+                <span class="count-unit">Секунд</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="wrapper position-relative">
+    <div class="wizard-content-1 clearfix">
+        <div class="step-inner-content clearfix position-relative">
+            <div class="form-area position-relative">
+                <div class="multisteps-form__panel js-active fadeIn" data-animation="fadeIn">
+                    <div class="wizard-forms clearfix position-relative">
+                        {% block content %}
+                        <div class="quiz-title text-center">
+                            <span>Question 2</span>
+                            <h2>Thankyou! Tell us what you do ?</h2>
+                        </div>
+                        <div class="quiz-option-selector quiz-option-selector-2 clearfix">
+                            <ul>
+                                <li>
+                                    <label class="start-quiz-item">
+                                        <input type="radio" name="quiz" value="Email Markering"
+                                               class="exp-option-box">
+                                        <span class="exp-number text-uppercase"><img src="./Quiz_files/qi1.png"
+                                                                                     alt=""></span>
+                                        <span class="exp-label">Audo Services</span>
+                                        <span class="checkmark-border"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="quiz" value="Font Developer"
+                                               class="exp-option-box">
+                                        <span class="exp-number text-uppercase"><img src="./Quiz_files/qi2.png"
+                                                                                     alt=""></span>
+                                        <span class="exp-label">Entertainment</span>
+                                        <span class="checkmark-border"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="quiz" value="Digital Marketing"
+                                               class="exp-option-box">
+                                        <span class="exp-number text-uppercase"><img src="./Quiz_files/qi3.png"
+                                                                                     alt=""></span>
+                                        <span class="exp-label">Household Services</span>
+                                        <span class="checkmark-border"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="quiz" value="SEO" class="exp-option-box">
+                                        <span class="exp-number text-uppercase"><img src="./Quiz_files/qi4.png"
+                                                                                     alt=""></span>
+                                        <span class="exp-label">Medicine and Health </span>
+                                        <span class="checkmark-border"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="quiz" value="SEO" class="exp-option-box">
+                                        <span class="exp-number text-uppercase"><img src="./Quiz_files/qi7.png"
+                                                                                     alt=""></span>
+                                        <span class="exp-label">Rent and lease </span>
+                                        <span class="checkmark-border"></span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="quiz" value="SEO" class="exp-option-box">
+                                        <span class="exp-number text-uppercase"><img src="./Quiz_files/qi6.png"
+                                                                                     alt=""></span>
+                                        <span class="exp-label">Construction and repair </span>
+                                        <span class="checkmark-border"></span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block javascripts %}
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/quiz.js') }}"></script>
+{% endblock %}
+</body>
+</html>

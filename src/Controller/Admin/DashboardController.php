@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Gallery\Folder;
 use App\Entity\Gallery\Photo;
+use App\Entity\Quiz\Question;
+use App\Entity\Quiz\Team;
 use App\Entity\User\Guest;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -34,5 +36,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Галлерея');
         yield MenuItem::linkToCrud('Папки', 'fas fa-folder', Folder::class);
         yield MenuItem::linkToCrud('Фото', 'fas fa-camera', Photo::class);
+        yield MenuItem::section('Викторина');
+        yield MenuItem::linkToCrud('Команды', 'fas fa-users', Team::class);
+        yield MenuItem::linkToCrud('Вопросы', 'fas fa-question', Question::class);
     }
 }

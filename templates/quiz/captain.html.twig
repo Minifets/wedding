@@ -1,0 +1,55 @@
+{% extends 'quiz/base.html.twig' %}
+
+{% block content %}
+    {% if (is_granted('ROLE_ADMIN')) %}
+        <div class="quiz-title text-center">
+            <span>Выбор капитана</span>
+            <h2>У команд есть 2 минуты, чтобы выбрать капитана.</h2>
+        </div>
+    {% else %}
+        <div class="quiz-title text-center">
+            <span>Выбор капитана</span>
+            <h2>Выберите капитана своей команды</h2>
+        </div>
+        <div class="quiz-option-selector quiz-option-selector-2 clearfix">
+            <ul>
+                {% for member in members %}
+                    <li>
+                        <label class="start-quiz-item">
+                            <input type="radio" name="quiz" value="{{ member.id }}" class="exp-option-box">
+                            <span class="exp-number text-uppercase">
+                            <img src="" alt="">
+                        </span>
+                            <span class="exp-label">{{ member.name }}</span>
+                            <span class="checkmark-border"></span>
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block title %}Выбор капитана{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            countDown(120);
+            $('.exp-option-box').on('click', function (event) {
+                let checkbox = $(this);
+
+                $.ajax('{{ path('app_quiz_vote') }}', {
+                    method: 'POST',
+                    data: {
+                        vote: checkbox.val()
+                    },
+                    success: function (data) {
+                        $('.quiz-option-selector').html('<div class="text-center">Спасибо. Ваш голос учтен.</div>');
+                    }
+                });
+            });
+        })
+    </script>
+{% endblock %}

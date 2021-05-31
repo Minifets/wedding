@@ -1,0 +1,15 @@
+{% extends 'quiz/base.html.twig' %}
+
+{% block content %}
+    {% if (is_granted('ROLE_ADMIN')) %}
+        <div class="quiz-title text-center">
+            <form method="post" action="{{ path('app_quiz_start') }}">
+                <input class="btn btn-lg btn-primary" type="submit" value="Начать викторину">
+            </form>
+        </div>
+    {% else %}
+        <div class="quiz-title text-center">
+            <h2>Подождите, пока ведущий начнет викторину.</h2>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Entity\User;
 
+use App\Entity\Quiz\Team;
 use App\Repository\User\GuestRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -55,6 +56,16 @@ class Guest implements UserInterface
      * @ORM\Column(type="json")
      */
     private $confirmations = [];
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="players")
+     */
+    private $team;
+
+    public function __toString()
+    {
+        return implode(', ', $this->persons);
+    }
 
     public function __construct()
     {
@@ -190,6 +201,18 @@ class Guest implements UserInterface
     public function setConfirmations(array $confirmations): self
     {
         $this->confirmations = $confirmations;
+
+        return $this;
+    }
+
+    public function getTeam(): ?Team
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?Team $team): self
+    {
+        $this->team = $team;
 
         return $this;
     }
