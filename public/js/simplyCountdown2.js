@@ -208,6 +208,8 @@
                     secondsLeft = (targetDate - now.getTime()) / 1000;
                 }
 
+                secondsLeft = Math.abs(secondsLeft);
+
                 if (secondsLeft > 0) {
                     days = parseInt(secondsLeft / 86400, 10);
                     secondsLeft = secondsLeft % 86400;
