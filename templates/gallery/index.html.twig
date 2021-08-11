@@ -26,12 +26,36 @@
                 <div class="col-md-12">
                     <ul id="fh5co-gallery-list">
                         {% for photo in photos %}
-                            <li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url({{ asset(photo.fullPath) }}); ">
+                            <li class="one-third animate-box image-popup" data-animate-effect="fadeIn"
+                                style="background-image: url({{ asset(photo.fullPath) }}); "
+                                data-mfp-src="{{ asset(photo.fullPath) }}"
+                                data-name="{{ photo.fileName }}">
                             </li>
                         {% endfor %}
                     </ul>
                 </div>
             </div>
+            <div class="row">
+                <div style="display: flex; align-items: center">
+                    <a href="#" class="btn btn-block btn-lg btn-default download">Скачать все</a>
+                </div>
+            </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            $('.image-popup').magnificPopup({type:'image'});
+            $('.download').on('click', function (e) {
+                e.preventDefault();
+                $('.image-popup').each(function (i, item) {
+                    let imageData = $(item);
+                    saveAs(imageData.data('mfp-src'), imageData.data('name'));
+                });
+            });
+        });
+    </script>
 {% endblock %}
